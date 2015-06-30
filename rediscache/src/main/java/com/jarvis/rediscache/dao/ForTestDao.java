@@ -1,48 +1,32 @@
 package com.jarvis.rediscache.dao;
 
-import java.io.IOException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
 
 import com.google.protobuf.Parser;
-import com.jarvis.rediscache.conf.RedisResource;
 import com.jarvis.rediscache.protobuf.ReportPB.ReportBean;
 
-public class ForTestDao extends RedisResource<ReportBean>{
+@Component("ForTestDao")
+public class ForTestDao extends RedisMapBaseDao<ReportBean, ReportBean> {
 
-	@Override
-	protected byte[] getRedisObjName() {
-		// TODO Auto-generated method stub
-		return null;
+	private static final Logger LOG = LoggerFactory.getLogger(ForTestDao.class);
+
+	public static final String beanName;
+	static {
+		beanName = ForTestDao.class.getAnnotation(Component.class).value();
 	}
 
-	@Override
-	protected void init() throws IOException {
-		// TODO Auto-generated method stub
-		
-	}
+	private static final String redisObjName = "forTest";
 
 	@Override
-	protected long getLastVisitTime(ReportBean t) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	protected long getWaitTime() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	protected ReportBean setAndGetVisitTime(ReportBean t) {
-		// TODO Auto-generated method stub
-		return null;
+	protected String getRedisObjName() {
+		return redisObjName;
 	}
 
 	@Override
 	protected Parser<ReportBean> getParser() {
-		// TODO Auto-generated method stub
-		return null;
+		return ReportBean.PARSER;
 	}
 
-	
 }
