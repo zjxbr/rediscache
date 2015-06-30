@@ -2,6 +2,7 @@ package com.jarvis.rediscache.dao;
 
 import java.io.IOException;
 
+import com.google.protobuf.Parser;
 import com.jarvis.rediscache.conf.RedisResource;
 import com.jarvis.rediscache.protobuf.ReportPB.ReportBean;
 
@@ -37,4 +38,11 @@ public class ForTestDao extends RedisResource<ReportBean>{
 		return null;
 	}
 
+	@Override
+	protected Parser<ReportBean> getParser() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	
 }
